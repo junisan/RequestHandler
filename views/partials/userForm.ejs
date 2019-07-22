@@ -1,0 +1,66 @@
+<% if (typeof userForm !== 'undefined' && userForm !== null) edit = true; else edit = false %>
+<form class="form-horizontal" method="post" action="/admin/manage/<% if(edit) {%><%=userForm._id%><%}else{%>new<%}%>"
+id='<% if (edit) {%>editForm<%}else{%>newForm<%}%>'>
+    <% if (edit) { %>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Nombre</label>
+        <div class="col-sm-10">
+            <p class="form-control-static"><%=userForm.name%> (No se puede cambiar)</p>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Access Point</label>
+        <div class="col-sm-10">
+            <p class="form-control-static"><%=userForm.ap%> (No se puede cambiar)</p>
+        </div>
+    </div>
+    <% } else { %>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Nombre</label>
+        <div class="col-sm-10">
+            <input type="text" id="usernameForm" name="username" class="form-control" placeholder="Nombre de usuario"
+            <% if (edit) { %> value="<%=userForm.name%>" <% } %> >
+        </div>
+    </div>
+    <% } %>
+
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Password</label>
+        <div class="col-sm-10">
+            <input type="password" id="passwordForm" class="form-control" placeholder="Password">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Re - Password</label>
+        <div class="col-sm-10">
+            <input type="password" id="password2Form" class="form-control" placeholder="Repita password">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-2 control-label">Email</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="emailForm" placeholder="Email" <% if (edit) { %> value="<%=userForm.email%>" <% } %> >
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" id="adminForm" <% if (edit && userForm.admin === true) { %> checked="checked" <% } %> > El usuario es administrador (puede añadir otros usuarios)
+                </label>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Guardar</button>
+        </div>
+        <% if (edit && user.admin === true) {%>
+        <div class="col-sm-offset-6 col-sm-10">
+            <button type="button" id="deleteUserBtn" data-id="<%=userForm._id%>" class="btn btn-danger">Eliminar</button>
+        </div>
+        <% } %>
+    </div>
+</form>

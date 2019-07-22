@@ -1,0 +1,26 @@
+<div class="request" id="request<%=request._id%>">
+    <div class="id">
+        <span class="type type_<%=request.method%>"><%=request.method%></span>
+        #<%=request._id%>
+        <span class="date"> @ <%=request.created_at%></span>
+    </div>
+
+    <div class="body">
+        <div>Body</div>
+        <%= request.body %>
+    </div>
+    <div class="body header">
+        <div>
+            Headers <% if (typeof request.ip !== "undefined") {%>(desde ip: <%=request.ip%>)<%}%>
+        </div>
+        <%= request.headers %>
+    </div>
+    <div class="body curl">
+        <div>cUrl</div>
+        <textarea name="curlCommand" id="" cols="30" rows="10" style="width: 100%" data-headers="<%=request.headers%>" data-body="<%=request.body%>" data-method="<%=request.method%>"></textarea>
+    </div>
+    <div class="delete body">
+        <a href="#" class="delete btn btn-danger btn-sm" data-requestid="<%=request._id%>">Eliminar</a> esta petición
+    </div>
+    <hr>
+</div>
